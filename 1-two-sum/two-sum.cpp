@@ -23,39 +23,64 @@ public:
 
     // Better Approach
 
-   vector<int> twoSum(vector<int>& nums, int target) {
-    int n = nums.size();
+//    vector<int> twoSum(vector<int>& nums, int target) {
+//     int n = nums.size();
 
     // Store {value, original index}
-    vector<pair<int, int>> arr;
+    // vector<pair<int, int>> arr;
 
-    for(int i = 0; i < n; i++) {
-        arr.push_back({nums[i], i});
-    }
+    // for(int i = 0; i < n; i++) {
+    //     arr.push_back({nums[i], i});
+    // }
 
     // Sort according to value
-    sort(arr.begin(), arr.end());
+//     sort(arr.begin(), arr.end());
 
-    int st = 0;
-    int end = n - 1;
+//     int st = 0;
+//     int end = n - 1;
 
-    while(st < end) {
+//     while(st < end) {
 
-        int sum = arr[st].first + arr[end].first;
+//         int sum = arr[st].first + arr[end].first;
 
-        if(sum == target) {
-            return {arr[st].second, arr[end].second};
+//         if(sum == target) {
+//             return {arr[st].second, arr[end].second};
+//         }
+
+//         else if(sum < target) {
+//             st++;
+//         }
+
+//         else {
+//             end--;
+//         }
+//     }
+
+//     return {};
+// }
+
+
+
+
+
+// Optimized Code using hashing
+
+vector<int> twoSum(vector<int>& arr, int target){
+    unordered_map<int, int> m;
+    vector<int> ans;
+
+    for(int i=0; i<arr.size(); i++){
+        int first = arr[i];
+        int sec = target - first;
+
+        if(m.find(sec) != m.end()){
+            ans.push_back(i);
+            ans.push_back(m[sec]);
+            break;
         }
 
-        else if(sum < target) {
-            st++;
-        }
-
-        else {
-            end--;
-        }
+        m[first] = i;
     }
-
-    return {};
+    return ans;
 }
 };
