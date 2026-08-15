@@ -1,3 +1,60 @@
+// class Solution {
+// public:
+//     bool isVowel(char c) {
+//         return c == 'a' || c == 'e' || c == 'i' ||
+//                c == 'o' || c == 'u' ||
+//                c == 'A' || c == 'E' || c == 'I' ||
+//                c == 'O' || c == 'U';
+//     }
+
+//     string reverseVowels(string s) {
+//         vector<char> vowels;
+
+//         // Store vowels
+//         for (char c : s) {
+//             if (isVowel(c))
+//                 vowels.push_back(c);
+//         }
+
+//         // Reverse vowels
+//         reverse(vowels.begin(), vowels.end());
+
+//         // Put them back
+//         int j = 0;
+//         for (char &c : s) {
+//             if (isVowel(c)) {
+//                 c = vowels[j++];
+//             }
+//         }
+
+//         return s;
+//     }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// BETTER APPROACH
+
 class Solution {
 public:
     bool isVowel(char c) {
@@ -8,25 +65,23 @@ public:
     }
 
     string reverseVowels(string s) {
-        vector<char> vowels;
+        vector<int> pos;
 
-        // Store vowels
-        for (char c : s) {
-            if (isVowel(c))
-                vowels.push_back(c);
+        for (int i = 0; i < s.size(); i++) {
+            if (isVowel(s[i]))
+                pos.push_back(i);
         }
 
-        // Reverse vowels
-        reverse(vowels.begin(), vowels.end());
+        int left = 0;
+        int right = pos.size() - 1;
 
-        // Put them back
-        int j = 0;
-        for (char &c : s) {
-            if (isVowel(c)) {
-                c = vowels[j++];
-            }
+        while (left < right) {
+            swap(s[pos[left]], s[pos[right]]);
+            left++;
+            right--;
         }
 
         return s;
     }
 };
+
