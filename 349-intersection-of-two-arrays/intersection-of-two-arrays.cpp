@@ -1,37 +1,87 @@
+// class Solution {
+// public:
+//     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+//         vector<int> ans;
+
+//         for (int i = 0; i < nums1.size(); i++) {
+
+//             bool found = false;
+
+//             // Search nums1[i] in nums2
+//             for (int j = 0; j < nums2.size(); j++) {
+//                 if (nums1[i] == nums2[j]) {
+//                     found = true;
+//                     break;
+//                 }
+//             }
+
+//             // If found, check whether already present in answer
+//             if (found) {
+//                 bool duplicate = false;
+
+//                 for (int x : ans) {
+//                     if (x == nums1[i]) {
+//                         duplicate = true;
+//                         break;
+//                     }
+//                 }
+
+//                 if (!duplicate) {
+//                     ans.push_back(nums1[i]);
+//                 }
+//             }
+//         }
+
+//         return ans;
+//     }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Better Approach
+
 class Solution {
 public:
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        sort(nums1.begin(), nums1.end());
+        sort(nums2.begin(), nums2.end());
+
         vector<int> ans;
 
-        for (int i = 0; i < nums1.size(); i++) {
+        int i = 0;
+        int j = 0;
 
-            bool found = false;
+        while (i < nums1.size() && j < nums2.size()) {
 
-            // Search nums1[i] in nums2
-            for (int j = 0; j < nums2.size(); j++) {
-                if (nums1[i] == nums2[j]) {
-                    found = true;
-                    break;
-                }
+            if (nums1[i] < nums2[j]) {
+                i++;
             }
-
-            // If found, check whether already present in answer
-            if (found) {
-                bool duplicate = false;
-
-                for (int x : ans) {
-                    if (x == nums1[i]) {
-                        duplicate = true;
-                        break;
-                    }
-                }
-
-                if (!duplicate) {
+            else if (nums1[i] > nums2[j]) {
+                j++;
+            }
+            else {
+                // Same element
+                if (ans.empty() || ans.back() != nums1[i]) {
                     ans.push_back(nums1[i]);
                 }
+
+                i++;
+                j++;
             }
         }
 
         return ans;
     }
 };
+
