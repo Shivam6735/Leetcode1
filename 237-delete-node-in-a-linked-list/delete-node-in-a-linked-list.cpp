@@ -6,18 +6,41 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+// class Solution {
+// public:
+//     void deleteNode(ListNode* node) {
+//         ListNode* prev  = NULL;
+        
+//         while(node != NULL && node->next != NULL){
+//             node->val = node->next->val;
+
+//             prev = node;  // assigning to the previous
+//             node = node->next;
+//         }
+//         prev->next = NULL;
+//         delete(node);
+//     }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+// KHUD SE
+
+
 class Solution {
 public:
     void deleteNode(ListNode* node) {
-        ListNode* prev  = NULL;
-        
-        while(node != NULL && node->next != NULL){
-            node->val = node->next->val;
-
-            prev = node;  // assigning to the previous
-            node = node->next;
-        }
-        prev->next = NULL;
-        delete(node);
+       node->val = node->next->val;
+       node->next = node->next->next;
     }
 };
