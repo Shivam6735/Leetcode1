@@ -1,14 +1,40 @@
+// class Solution {
+// public:
+//     int countSegments(string s) {
+//         stringstream ss(s);
+//         string word;
+//         int count = 0;
+
+//         while (ss >> word) {
+//             count++;
+//         }
+
+//         return count;
+//     }
+// };
+
+
+
+
+
+
+
+
+
+
+
 class Solution {
 public:
     int countSegments(string s) {
-        stringstream ss(s);
-        string word;
         int count = 0;
 
-        while (ss >> word) {
-            count++;
+        for (int i = 0; i < s.size(); i++) {
+            if (s[i] != ' ' && (i == 0 || s[i - 1] == ' ')) {
+                count++;
+            }
         }
 
         return count;
     }
 };
+
