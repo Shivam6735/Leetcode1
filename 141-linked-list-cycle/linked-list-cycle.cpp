@@ -6,33 +6,66 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+// class Solution {
+// public:
+//     bool hasCycle(ListNode *head) {
+
+//         vector<ListNode*> visited;
+//         ListNode* temp = head;
+
+
+//         while(temp != NULL){
+
+//             bool found = false;
+
+//             for(ListNode* node : visited){
+//             if(node == temp){
+//                 found = true;
+//                 break;
+//             }
+//             }
+            
+//             if(found){
+//                 return true;  
+//             }
+
+//             visited.push_back(temp);
+//             temp = temp->next;
+//             }
+
+//         return false;
+//     }
+// };
+
+
+
+
+
+
+
+
+
+
+// BETTER APPROACH USING HASHSET
+
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
+        unordered_set<ListNode*> visited;
 
-        vector<ListNode*> visited;
         ListNode* temp = head;
-
-
         while(temp != NULL){
-
-            bool found = false;
-
-            for(ListNode* node : visited){
-            if(node == temp){
-                found = true;
-                break;
+            if(visited.count(temp)){
+                return true;
             }
+            else {
+                visited.insert(temp);
+                temp = temp->next;
             }
             
-            if(found){
-                return true;  
-            }
-
-            visited.push_back(temp);
-            temp = temp->next;
-            }
-
+        }
         return false;
     }
+
+
 };
