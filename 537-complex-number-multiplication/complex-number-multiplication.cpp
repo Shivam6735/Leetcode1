@@ -31,27 +31,64 @@
 
 // BETTER APPROACH
 
+// class Solution {
+// public:
+
+//     vector<int> parse(string s) {
+//         int pos = s.find('+');
+
+//         int real = stoi(s.substr(0, pos));
+//         int imag = stoi(s.substr(pos + 1, s.size() - pos - 2));
+
+//         return {real, imag};
+//     }
+
+//     string complexNumberMultiply(string num1, string num2) {
+
+//         vector<int> a = parse(num1);
+//         vector<int> b = parse(num2);
+
+//         int real = a[0] * b[0] - a[1] * b[1];
+//         int imag = a[0] * b[1] + a[1] * b[0];
+
+//         return to_string(real) + "+" + to_string(imag) + "i";
+//     }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// BEST OPTIMAL
+
 class Solution {
 public:
-
-    vector<int> parse(string s) {
-        int pos = s.find('+');
-
-        int real = stoi(s.substr(0, pos));
-        int imag = stoi(s.substr(pos + 1, s.size() - pos - 2));
-
-        return {real, imag};
-    }
-
     string complexNumberMultiply(string num1, string num2) {
 
-        vector<int> a = parse(num1);
-        vector<int> b = parse(num2);
+        int a, b, c, d;
+        char plus, i;
 
-        int real = a[0] * b[0] - a[1] * b[1];
-        int imag = a[0] * b[1] + a[1] * b[0];
+        stringstream ss1(num1);
+        ss1 >> a >> plus >> b >> i;
+
+        stringstream ss2(num2);
+        ss2 >> c >> plus >> d >> i;
+
+        int real = a * c - b * d;
+        int imag = a * d + b * c;
 
         return to_string(real) + "+" + to_string(imag) + "i";
     }
 };
+
 
