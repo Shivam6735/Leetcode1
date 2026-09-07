@@ -32,16 +32,43 @@
 
 
 
+// class Solution {
+// public:
+//     int titleToNumber(string columnTitle) {
+//         int ans = 0;
+
+//         for (char ch : columnTitle) {
+//             int value = ch - 'A' + 1;
+//             ans = ans * 26 + value;
+//         }
+
+//         return ans;
+//     }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Solution {
 public:
     int titleToNumber(string columnTitle) {
-        int ans = 0;
+        long long ans = 0;
 
-        for (char ch : columnTitle) {
-            int value = ch - 'A' + 1;
-            ans = ans * 26 + value;
+        for (char c : columnTitle) {
+            ans = ans * 26 + (c - 'A' + 1);
         }
 
         return ans;
     }
 };
+
