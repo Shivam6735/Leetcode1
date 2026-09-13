@@ -39,26 +39,67 @@
 
 
 
+// class Solution {
+// public:
+//     vector<int> inorderTraversal(TreeNode* root) {
+
+//         if (root == nullptr)
+//             return {};
+
+//         vector<int> ans;
+
+//         vector<int> left = inorderTraversal(root->left);
+
+//         for (int x : left)
+//             ans.push_back(x);
+
+//         ans.push_back(root->val);
+
+//         vector<int> right = inorderTraversal(root->right);
+
+//         for (int x : right)
+//             ans.push_back(x);
+
+//         return ans;
+//     }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
 
-        if (root == nullptr)
-            return {};
-
         vector<int> ans;
+        stack<TreeNode*> st;
 
-        vector<int> left = inorderTraversal(root->left);
+        while (root != nullptr || !st.empty()) {
 
-        for (int x : left)
-            ans.push_back(x);
+            // Go as left as possible
+            while (root != nullptr) {
+                st.push(root);
+                root = root->left;
+            }
 
-        ans.push_back(root->val);
+            // Process node
+            root = st.top();
+            st.pop();
 
-        vector<int> right = inorderTraversal(root->right);
+            ans.push_back(root->val);
 
-        for (int x : right)
-            ans.push_back(x);
+            // Move to right subtree
+            root = root->right;
+        }
 
         return ans;
     }
