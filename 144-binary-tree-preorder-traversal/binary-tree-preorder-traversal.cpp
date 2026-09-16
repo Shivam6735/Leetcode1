@@ -41,33 +41,94 @@
 
 
 
+// class Solution {
+// public:
+//     vector<int> preorderTraversal(TreeNode* root) {
+
+//         vector<int> ans;
+
+//         if (root == nullptr)
+//             return ans;
+
+//         stack<TreeNode*> st;
+//         st.push(root);
+
+//         while (!st.empty()) {
+
+//             TreeNode* node = st.top();
+//             st.pop();
+
+//             // Root
+//             ans.push_back(node->val);
+
+//             // Right first
+//             if (node->right != nullptr)
+//                 st.push(node->right);
+
+//             // Left second
+//             if (node->left != nullptr)
+//                 st.push(node->left);
+//         }
+
+//         return ans;
+//     }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
 
         vector<int> ans;
 
-        if (root == nullptr)
-            return ans;
+        while (root != nullptr) {
 
-        stack<TreeNode*> st;
-        st.push(root);
+            // No left subtree
+            if (root->left == nullptr) {
 
-        while (!st.empty()) {
+                ans.push_back(root->val);
+                root = root->right;
+            }
 
-            TreeNode* node = st.top();
-            st.pop();
+            else {
 
-            // Root
-            ans.push_back(node->val);
+                // Find predecessor
+                TreeNode* predecessor = root->left;
 
-            // Right first
-            if (node->right != nullptr)
-                st.push(node->right);
+                while (predecessor->right != nullptr &&
+                       predecessor->right != root) {
+                    predecessor = predecessor->right;
+                }
 
-            // Left second
-            if (node->left != nullptr)
-                st.push(node->left);
+                // Create temporary link
+                if (predecessor->right == nullptr) {
+
+                    // Process root BEFORE going left
+                    ans.push_back(root->val);
+
+                    predecessor->right = root;
+                    root = root->left;
+                }
+
+                // Remove temporary link
+                else {
+
+                    predecessor->right = nullptr;
+                    root = root->right;
+                }
+            }
         }
 
         return ans;
