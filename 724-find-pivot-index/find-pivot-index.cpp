@@ -35,21 +35,56 @@
 
 
 
+// class Solution {
+// public:
+//     int pivotIndex(vector<int>& nums) {
+//         int totalSum = 0;
+
+//         for (int x : nums) {
+//             totalSum += x;
+//         }
+
+//         int leftSum = 0;
+
+//         for (int i = 0; i < nums.size(); i++) {
+//             int rightSum = totalSum - leftSum - nums[i];
+
+//             if (leftSum == rightSum) {
+//                 return i;
+//             }
+
+//             leftSum += nums[i];
+//         }
+
+//         return -1;
+//     }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Solution {
 public:
     int pivotIndex(vector<int>& nums) {
-        int totalSum = 0;
+        long long totalSum = 0;
 
         for (int x : nums) {
             totalSum += x;
         }
 
-        int leftSum = 0;
+        long long leftSum = 0;
 
         for (int i = 0; i < nums.size(); i++) {
-            int rightSum = totalSum - leftSum - nums[i];
-
-            if (leftSum == rightSum) {
+            if (leftSum == totalSum - leftSum - nums[i]) {
                 return i;
             }
 
